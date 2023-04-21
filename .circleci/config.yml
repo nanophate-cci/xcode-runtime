@@ -1,0 +1,26 @@
+version: 2.1
+
+jobs:
+  mac-os:
+    parameters:
+      version:
+        default: "14.0.0"
+        type: string
+    macos:
+      xcode: << parameters.version >>
+    resource_class: macos.x86.medium.gen2
+    steps:
+      - checkout
+      - run: sysctl machdep.cpu.brand_string
+      - run: xcodebuild -showsdks
+      - run: xcodes runtimes install 'iOS 16.0'
+      - run: xcodes runtimes install 'iOS 13.2'
+workflows:
+  workflow1:
+    jobs:
+      - mac-os:
+          matrix:
+            parameters:
+              version: ["14.1.0", "14.0.0"]
+ 
+
