@@ -13,6 +13,9 @@ jobs:
       - checkout
       - run: sysctl machdep.cpu.brand_string
       - run: xcodebuild -showsdks
+      - run: |
+          brew tap robotsandpencils/made
+          brew install robotsandpencils/made/xcodes
       - run: xcodes runtimes install 'iOS 16.0'
       - run: xcodes runtimes install 'iOS 13.2'
 workflows:
